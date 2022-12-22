@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+  <section class="menu_header">
+    <img src="{% static 'img/logoteach.png' %}" alt="LogoTwitter" />
+    <h1>EDIT</h1>
+  </section>
+  <section class="post_form">
+    <form
+      action="/edit/{{post.id}}/"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %}
+      <div class="logo_menu">
+        <img src="{% static 'img/user.png' %}" alt="User Photo" />
+      </div>
+      <div class="menu_body">
+        <div class="username">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            value="{{post.name}}"
+          />
+        </div>
+        <input
+          type="text"
+          name="body"
+          placeholder="Your name"
+          value="{{post.body}}"
+        />
+
+        {% if post.image.url %}
+        <img class="post-border" src="{{ post.image.url }}" style="width: 100%;"/>
+        {% endif %}
+        <div class="flex">
+            <input class="inputimage" name="image" type="file" />
+            <div class="b1">
+                <a class="cancel-button" href="{%  url 'index' %}">Cancel</a>
+                <input class="update-button" type="submit" value="Update" />
+            </div>
+        </div>
+      
+    </form>
+  </section>
+  
+</section>
+{% endblock %}
